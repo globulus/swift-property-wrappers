@@ -2,7 +2,7 @@
 
 A Collection of useful Swift [property wrappers](https://www.google.com/search?q=swift+property+wrappers) to make coding easier.
 
-* 11 wrappers included.
+* 13 wrappers included.
 * Most wrappers are **fully unit tested**.
 * Most wrappers can be observed via `Publisher`s exposed in their `projectedValue`s.
 * PRs welcome.
