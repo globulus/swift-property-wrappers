@@ -2,7 +2,7 @@
 
 A Collection of useful Swift [property wrappers](https://www.google.com/search?q=swift+property+wrappers) to make coding easier.
 
-* 13 wrappers included.
+* 14 wrappers included.
 * Most wrappers are **fully unit tested**.
 * Most wrappers can be observed via `Publisher`s exposed in their `projectedValue`s.
 * PRs welcome.
@@ -136,6 +136,24 @@ value == 10 // works
 value == 10 // still there
 // sleep for 5 more seconds
 value == nil // expired and nulled
+```
+
+### LazyWithReset
+
+* Allows for lazy evaluation of properties with the added option of resetting them, so that the lazy initialization block runs again. In other words, if you have a `lazy var` that should, for whatever reason, be re-evaluated on next get, use this property wrapper.
+* `projectedValue` exposes the wrapper itself and allows for using its `reset` method.
+
+Sample use:
+
+```swift
+@LazyWithReset({ Date().timeIntervalSince1970 }) var currentTime: TimeInterval
+
+let time = currentTime
+let time2 = currentTime
+time == time2 // just one lazy evaluation occurred
+$currentTime.reset() // re-evaluate on next get
+let time3 = currentTime
+time3 != time // new lazy evaluation occurred
 ```
 
 ### Localized
@@ -302,7 +320,7 @@ value == 1 // 1 is a valid value so it overwrites the old one
 
 ## Installation
 
-This component is distrubuted as a **Swift package**. Just add this URL to your package list:
+This component is distributed as a **Swift package**. Just add this URL to your package list:
 
 ```text
 https://github.com/globulus/swift-property-wrappers
@@ -310,6 +328,7 @@ https://github.com/globulus/swift-property-wrappers
 
 ## Changelog
 
+* 1.1.0 - Addded `LazyWithReset`.
 * 1.0.0 - Initial release.
 
 
