@@ -329,7 +329,7 @@ https://github.com/globulus/swift-property-wrappers
 You can also use **CocoaPods**:
 
 ```ruby
-pod 'SwiftPropertyWrappers', '~> 1.1.1'
+pod 'SwiftPropertyWrappers', '~> 1.1.0'
 ```
 
 ## Changelog
