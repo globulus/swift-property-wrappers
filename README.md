@@ -326,8 +326,15 @@ This component is distributed as a **Swift package**. Just add this URL to your 
 https://github.com/globulus/swift-property-wrappers
 ```
 
+You can also use **CocoaPods**:
+
+```ruby
+pod 'SwiftPropertyWrappers', '~> 1.1.1'
+```
+
 ## Changelog
 
+* 1.1.1 - Added CocoaPods.
 * 1.1.0 - Addded `LazyWithReset`.
 * 1.0.0 - Initial release.
 
