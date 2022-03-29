@@ -1,8 +1,8 @@
 # Swift Property Wrappers
 
-A Collection of useful Swift [property wrappers](https://www.google.com/search?q=swift+property+wrappers) to make coding easier.
+A collection of useful Swift [property wrappers](https://www.google.com/search?q=swift+property+wrappers) to make coding easier.
 
-* 14 wrappers included.
+* 15 wrappers included.
 * Most wrappers are **fully unit tested**.
 * Most wrappers can be observed via `Publisher`s exposed in their `projectedValue`s.
 * PRs welcome.
@@ -141,12 +141,13 @@ value == nil // expired and nulled
 ### LazyWithReset
 
 * Allows for lazy evaluation of properties with the added option of resetting them, so that the lazy initialization block runs again. In other words, if you have a `lazy var` that should, for whatever reason, be re-evaluated on next get, use this property wrapper.
+* Lazy init block is an `@autoclosure`, which means you can omit braces if there's only one expression in it.
 * `projectedValue` exposes the wrapper itself and allows for using its `reset` method.
 
 Sample use:
 
 ```swift
-@LazyWithReset({ Date().timeIntervalSince1970 }) var currentTime: TimeInterval
+@LazyWithReset(Date().timeIntervalSince1970) var currentTime: TimeInterval
 
 let time = currentTime
 let time2 = currentTime
@@ -154,6 +155,37 @@ time == time2 // just one lazy evaluation occurred
 $currentTime.reset() // re-evaluate on next get
 let time3 = currentTime
 time3 != time // new lazy evaluation occurred
+```
+
+#### BoundLazyWithReset
+
+* Same as `LazyWithReset`, but the lazy init closure can take an argument of type `Receiver`. This is primarily used to allow for usage of `self` in a lazy init block, which is something that Swift `lazy var` can do.
+* `receiver` can be changed at any time via the projected value: `$myProp.receiver = self`.
+
+Sample use:
+
+```swift
+final class BoundLazyWithResetTest: XCTestCase {
+  var counter = 0
+  @BoundLazyWithReset<BoundLazyWithResetTest, Int>({ this in
+    if this.counter > 3 {
+      return 5
+    } else {
+      return 2
+    }
+  }) var transformedCounter: Int
+  
+  func test() throws {
+    $transformedCounter.receiver = self // HERE
+    let c1 = transformedCounter
+    let c2 = transformedCounter
+    XCTAssertEqual(c1, c2)
+    $transformedCounter.reset()
+    counter = 4
+    let c3 = transformedCounter
+    XCTAssertNotEqual(c1, c3)
+  }
+}
 ```
 
 ### Localized
@@ -192,6 +224,7 @@ myValue = 10 // prints 10 in the log
 ### Mocked
 
 * Always returns the value specified by the `mock` block.
+* Mock block is an `@autoclosure`, which means you can omit braces if there's only one expression in it.
 * The most common use case for this is to easily inject temporary mock functionality in a single place without having to modify code anywhere else.
 * While assignments don't have effect on the returned value, they are still accessible via `projectedValue.
 
@@ -226,7 +259,7 @@ class MockRepo: ItemRepo {
 }
 
 
-@Mocked({ MockRepo.shared }) var repo: ItemRepo = RealRepo()
+@Mocked(MockRepo.shared) var repo: ItemRepo = RealRepo()
 
 // always returns the mocked value
 let fetched = repo.fetch()

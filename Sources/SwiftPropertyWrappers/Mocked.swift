@@ -9,7 +9,8 @@ import Foundation
   
   public let mock: () -> Value
 
-  public init(wrappedValue: Value, _ mock: @escaping () -> Value) {
+  public init(wrappedValue: Value,
+              _ mock: @escaping @autoclosure () -> Value) {
     value = wrappedValue
     self.mock = mock
   }

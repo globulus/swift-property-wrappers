@@ -35,7 +35,7 @@ class MockRepo: ItemRepo {
 }
 
 final class MockedTest: XCTestCase {
-  @Mocked({ MockRepo.shared }) var repo: ItemRepo = RealRepo()
+  @Mocked(MockRepo.shared) var repo: ItemRepo = RealRepo()
 
   func testWrapped() throws {
     let fetched = repo.fetch()

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SwiftPropertyWrappers'
-  s.version          = '1.1.0'
+  s.version          = '1.2.0'
   s.summary          = 'A Collection of useful Swift property wrappers to make coding easier.'
   s.homepage         = 'https://github.com/globulus/swift-property-wrappers'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
