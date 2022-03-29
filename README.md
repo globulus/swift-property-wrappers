@@ -362,11 +362,12 @@ https://github.com/globulus/swift-property-wrappers
 You can also use **CocoaPods**:
 
 ```ruby
-pod 'SwiftPropertyWrappers', '~> 1.1.0'
+pod 'SwiftPropertyWrappers', '~> 1.2.0'
 ```
 
 ## Changelog
 
+* 1.2.0 - Added `BoundLazyWithReset`, added `@autoclosure` to `LazyWithReset` and `Mocked`.
 * 1.1.1 - Added CocoaPods.
 * 1.1.0 - Addded `LazyWithReset`.
 * 1.0.0 - Initial release.
