@@ -367,6 +367,7 @@ pod 'SwiftPropertyWrappers', '~> 1.2.0'
 
 ## Changelog
 
+* 1.2.1 - Fixed issue with `Expirable` internal initializer.
 * 1.2.0 - Added `BoundLazyWithReset`, added `@autoclosure` to `LazyWithReset` and `Mocked`.
 * 1.1.1 - Added CocoaPods.
 * 1.1.0 - Addded `LazyWithReset`.

@@ -11,7 +11,7 @@ import Foundation
         Date().timeIntervalSince1970
     }
     
-    init(_ expirationPeriod: TimeInterval) {
+    public init(_ expirationPeriod: TimeInterval) {
         self.expirationPeriod = expirationPeriod
     }
     
